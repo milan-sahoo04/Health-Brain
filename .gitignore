@@ -1,0 +1,11 @@
+# OS / editor junk
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Safety net in case a .env ever ends up at root
+.env
+
+# Just in case node_modules gets created at root instead of inside backend/frontend
+node_modules/
