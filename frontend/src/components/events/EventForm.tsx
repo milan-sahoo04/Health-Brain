@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { createEvent, updateEvent } from "../../lib/api";
+import { useEffect, useState } from "react";
+import { createEvent, updateEvent, getDistinctValues } from "../../lib/api";
 import type { HealthEvent, HealthEventWithId } from "../../lib/types";
 import { COMMON_EVENT_TYPES } from "../../lib/types";
 
@@ -51,6 +51,25 @@ export function EventForm({
 
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [eventTypeSuggestions, setEventTypeSuggestions] =
+    useState<string[]>(COMMON_EVENT_TYPES);
+  const [fieldNameSuggestions, setFieldNameSuggestions] = useState<string[]>(
+    [],
+  );
+
+  useEffect(() => {
+    getDistinctValues()
+      .then(({ eventTypes, fieldNames }) => {
+        // merge live values with the seed list, de-duplicated
+        setEventTypeSuggestions((prev) =>
+          Array.from(new Set([...prev, ...eventTypes])),
+        );
+        setFieldNameSuggestions(fieldNames);
+      })
+      .catch(() => {
+        // autocomplete is a convenience, not critical — fail silently
+      });
+  }, []);
 
   function addField() {
     setFields((prev) => [...prev, { id: makeRowId(), key: "", value: "" }]);
@@ -122,6 +141,12 @@ export function EventForm({
     }
   }
 
+  <datalist id="field-name-suggestions">
+    {fieldNameSuggestions.map((f) => (
+      <option key={f} value={f} />
+    ))}
+  </datalist>;
+
   return (
     <form
       onSubmit={handleSubmit}
@@ -142,7 +167,7 @@ export function EventForm({
             className="w-full border border-slate-300 rounded-md px-2 py-1.5 text-sm disabled:bg-slate-50 disabled:text-slate-400"
           />
           <datalist id="event-type-suggestions">
-            {COMMON_EVENT_TYPES.map((t) => (
+            {eventTypeSuggestions.map((t) => (
               <option key={t} value={t} />
             ))}
           </datalist>
@@ -168,6 +193,7 @@ export function EventForm({
         {fields.map((f) => (
           <div key={f.id} className="grid grid-cols-[1fr_1fr_auto] gap-2">
             <input
+              list="field-name-suggestions"
               placeholder="Field name (e.g. parameter)"
               value={f.key}
               onChange={(e) => updateFieldKey(f.id, e.target.value)}
