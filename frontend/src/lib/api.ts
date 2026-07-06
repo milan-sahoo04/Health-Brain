@@ -175,3 +175,14 @@ export async function deletePatient(id: string) {
   }
   return res.json() as Promise<{ message: string }>;
 }
+
+export interface DistinctValues {
+  eventTypes: string[];
+  fieldNames: string[];
+}
+
+export async function getDistinctValues() {
+  const res = await fetch(`${API_BASE}/events/distinct`);
+  if (!res.ok) throw new Error("Failed to fetch distinct values");
+  return res.json() as Promise<DistinctValues>;
+}

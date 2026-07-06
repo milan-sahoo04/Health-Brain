@@ -169,6 +169,43 @@ eventsRouter.delete("/batch/:batchId", async (req: Request, res: Response) => {
   }
 });
 
+// GET /events/distinct — distinct event types and field names already in use,
+// for autocomplete suggestions in the Log Event form
+eventsRouter.get("/distinct", async (_req: Request, res: Response) => {
+  try {
+    const typesResult = await withSession((session) =>
+      session.run(
+        `
+        MATCH (e)
+        WHERE e.type IS NOT NULL
+        RETURN collect(DISTINCT e.type) AS eventTypes
+        `,
+      ),
+    );
+
+    const fieldsResult = await withSession((session) =>
+      session.run(
+        `
+        MATCH (e)
+        WHERE e.type IS NOT NULL
+        UNWIND keys(e) AS key
+        WITH DISTINCT key
+        WHERE NOT key IN ['id', 'patientId', 'date', 'type', 'importBatchId', 'importedAt']
+        RETURN collect(key) AS fieldNames
+        `,
+      ),
+    );
+
+    return res.json({
+      eventTypes: typesResult.records[0]?.get("eventTypes") ?? [],
+      fieldNames: fieldsResult.records[0]?.get("fieldNames") ?? [],
+    });
+  } catch (err) {
+    console.error("Failed to fetch distinct values:", err);
+    return res.status(500).json({ error: "Failed to fetch distinct values" });
+  }
+});
+
 // GET /events/:patientId — fetch all events for a patient, most recent first
 eventsRouter.get("/:patientId", async (req: Request, res: Response) => {
   const { patientId } = req.params;
