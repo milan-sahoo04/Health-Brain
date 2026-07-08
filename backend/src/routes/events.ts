@@ -3,12 +3,26 @@ import { eventSchema, toSafeLabel } from "../schemas/event.schema";
 import { randomUUID } from "crypto";
 import { withSession } from "../db/neo4j";
 import { upsertEvent } from "../db/queries/upsertEvent";
+import { buildPatientMetricSeries } from "../services/timeSeriesBuilder";
+import { buildEventTimeline } from "../services/eventTimeline";
+import {
+  findCandidatePairs,
+  correlateMetricPair,
+} from "../services/correlationEngine";
+import {
+  persistAllPatterns,
+  persistAllAssociationRules,
+} from "../services/patternPersistence";
+import { buildPatientCategoricalItems } from "../services/categoricalSeriesBuilder";
+import { buildTransactions } from "../services/categoricalTransactionBuilder";
+import { mineAssociationRules } from "../services/associationRuleMiner";
 
 export const eventsRouter = Router();
 
 // POST /events/bulk — import many events at once from a JSON array.
 // Every event created in this call is tagged with the same importBatchId,
 // so the whole import can be undone later with one delete call.
+
 eventsRouter.post("/bulk", async (req: Request, res: Response) => {
   const body = req.body;
 
@@ -205,6 +219,175 @@ eventsRouter.get("/distinct", async (_req: Request, res: Response) => {
     return res.status(500).json({ error: "Failed to fetch distinct values" });
   }
 });
+
+// GET /events/:patientId/correlations — diagnostic route, Phase B.
+// Computes lag-correlated metric pairs, excluding confounded observations.
+eventsRouter.get(
+  "/:patientId/correlations",
+  async (req: Request, res: Response) => {
+    const patientId = req.params.patientId;
+    if (typeof patientId !== "string") {
+      return res.status(400).json({ error: "Invalid patientId" });
+    }
+
+    try {
+      const [seriesMap, timeline] = await withSession(async (session) => {
+        const s = await buildPatientMetricSeries(session, patientId);
+        const t = await buildEventTimeline(session, patientId);
+        return [s, t] as const;
+      });
+
+      const pairs = findCandidatePairs(seriesMap);
+      const results = [];
+      for (const [seriesA, seriesB] of pairs) {
+        const typeA = seriesA.metricName.split(":")[0];
+        const typeB = seriesB.metricName.split(":")[0];
+        const result = correlateMetricPair(
+          seriesA,
+          seriesB,
+          timeline,
+          typeA,
+          typeB,
+        );
+        if (result) results.push(result);
+      }
+
+      results.sort((a, b) => b.confidence - a.confidence);
+      return res.json({ patientId, pairsTested: pairs.length, results });
+    } catch (err) {
+      console.error("Failed to compute correlations:", err);
+      return res.status(500).json({ error: "Failed to compute correlations" });
+    }
+  },
+);
+
+// GET /events/:patientId/series — diagnostic route, Phase B.
+// Returns extracted numeric metric series for a patient.
+eventsRouter.get("/:patientId/series", async (req: Request, res: Response) => {
+  const patientId = req.params.patientId;
+  if (typeof patientId !== "string") {
+    return res.status(400).json({ error: "Invalid patientId" });
+  }
+
+  try {
+    const seriesMap = await withSession((session) =>
+      buildPatientMetricSeries(session, patientId),
+    );
+    const series = Array.from(seriesMap.values()).map((s) => ({
+      metricName: s.metricName,
+      pointCount: s.points.length,
+      points: s.points,
+    }));
+    return res.json({ patientId, metrics: series });
+  } catch (err) {
+    console.error("Failed to build series:", err);
+    return res.status(500).json({ error: "Failed to build series" });
+  }
+});
+
+// GET /events/:patientId/associations — diagnostic route, Phase C.
+// Mines pairwise association rules from categorical events.
+eventsRouter.get(
+  "/:patientId/associations",
+  async (req: Request, res: Response) => {
+    const { patientId } = req.params;
+    if (typeof patientId !== "string") {
+      return res.status(400).json({ error: "Invalid patientId" });
+    }
+
+    try {
+      const items = await withSession((session) =>
+        buildPatientCategoricalItems(session, patientId),
+      );
+      const transactions = buildTransactions(items);
+      const rules = mineAssociationRules(transactions);
+
+      return res.json({
+        patientId,
+        totalItems: items.length,
+        totalTransactions: transactions.length,
+        transactions,
+        rules,
+      });
+    } catch (err) {
+      console.error("Failed to mine associations:", err);
+      return res.status(500).json({ error: "Failed to mine associations" });
+    }
+  },
+);
+
+// POST /events/:patientId/synthesize — runs the FULL Phase B + Phase C pipeline:
+// correlation engine (numeric metrics) + association rule mining (categorical
+// events), both persisted as (:Pattern) nodes distinguished by `method`.
+eventsRouter.post(
+  "/:patientId/synthesize",
+  async (req: Request, res: Response) => {
+    const { patientId } = req.params;
+    if (typeof patientId !== "string") {
+      return res.status(400).json({ error: "Invalid patientId" });
+    }
+
+    try {
+      const { correlationSummaries, associationSummaries } = await withSession(
+        async (session) => {
+          // Phase B: correlation
+          const seriesMap = await buildPatientMetricSeries(session, patientId);
+          const timeline = await buildEventTimeline(session, patientId);
+          const pairs = findCandidatePairs(seriesMap);
+
+          const correlationResults = [];
+          for (const [seriesA, seriesB] of pairs) {
+            const typeA = seriesA.metricName.split(":")[0];
+            const typeB = seriesB.metricName.split(":")[0];
+            const result = correlateMetricPair(
+              seriesA,
+              seriesB,
+              timeline,
+              typeA,
+              typeB,
+            );
+            if (result) correlationResults.push(result);
+          }
+          const correlationSummaries = await persistAllPatterns(
+            session,
+            patientId,
+            correlationResults,
+          );
+
+          // Phase C: association rule mining
+          const items = await buildPatientCategoricalItems(session, patientId);
+          const transactions = buildTransactions(items);
+          const associationRules = mineAssociationRules(transactions);
+          const associationSummaries = await persistAllAssociationRules(
+            session,
+            patientId,
+            associationRules,
+          );
+
+          return { correlationSummaries, associationSummaries };
+        },
+      );
+
+      const allSummaries = [...correlationSummaries, ...associationSummaries];
+      const activeCount = allSummaries.filter(
+        (s) => s.status === "active",
+      ).length;
+      const belowThresholdCount = allSummaries.filter(
+        (s) => s.status === "below_threshold",
+      ).length;
+
+      return res.json({
+        patientId,
+        message: `Synthesis complete: ${activeCount} active patterns, ${belowThresholdCount} below threshold`,
+        correlationPatterns: correlationSummaries,
+        associationPatterns: associationSummaries,
+      });
+    } catch (err) {
+      console.error("Failed to run synthesis:", err);
+      return res.status(500).json({ error: "Failed to run synthesis" });
+    }
+  },
+);
 
 // GET /events/:patientId — fetch all events for a patient, most recent first
 eventsRouter.get("/:patientId", async (req: Request, res: Response) => {

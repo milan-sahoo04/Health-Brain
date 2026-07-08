@@ -186,3 +186,20 @@ export async function getDistinctValues() {
   if (!res.ok) throw new Error("Failed to fetch distinct values");
   return res.json() as Promise<DistinctValues>;
 }
+
+export interface SeriesEvent extends HealthEvent {
+  id: string;
+}
+
+export async function getEventSeries(patientId: string, type: string) {
+  const res = await fetch(
+    `${API_BASE}/events/${patientId}/series/${encodeURIComponent(type)}`,
+  );
+  if (!res.ok) throw new Error(`Failed to fetch ${type} series`);
+  return res.json() as Promise<{
+    patientId: string;
+    type: string;
+    count: number;
+    series: SeriesEvent[];
+  }>;
+}

@@ -5,6 +5,7 @@ import { EventList } from "./components/events/EventList";
 import { PatientGraph } from "./components/patient/PatientGraph";
 import { BulkImport } from "./components/events/BulkImport";
 import { ImportHistory } from "./components/events/ImportHistory";
+import { MenuScreen } from "./components/menu/MenuScreen";
 
 function Section({
   title,
@@ -80,6 +81,10 @@ function App() {
 
             <Section title="Patient Graph">
               <PatientGraph key={refreshKey} patientId={selectedPatientId} />
+            </Section>
+
+            <Section title="Menu">
+              <MenuScreen key={refreshKey} patientId={selectedPatientId} />
             </Section>
           </div>
         )}
