@@ -2,16 +2,18 @@ import { Session } from "neo4j-driver";
 import { CorrelationResult } from "./correlationEngine";
 import { AssociationRule } from "./associationRuleMiner";
 
-const MIN_CONFIDENCE_TO_STORE = 0.2; // below this, too weak to bother persisting at all
+const MIN_CONFIDENCE_TO_STORE = 0.2; // below this: still stored, but marked "too_weak"
 const ACTIVE_THRESHOLD = 0.5; // matches your architecture doc's "passes threshold" concept
 
-const MIN_LIFT_TO_STORE = 1.5; // below this, association is too weak to be meaningful
+const MIN_LIFT_TO_STORE = 1.5; // below this: still stored, but marked "too_weak"
 const ACTIVE_LIFT_THRESHOLD = 5; // separates routine co-logging from genuine clinical clusters
+
+export type PatternStatus = "active" | "below_threshold" | "too_weak";
 
 export interface PersistedPatternSummary {
   metricA: string;
   metricB: string;
-  status: "active" | "below_threshold";
+  status: PatternStatus;
   confidence: number;
   stored: boolean;
 }
@@ -19,36 +21,42 @@ export interface PersistedPatternSummary {
 export interface PersistedAssociationSummary {
   itemA: string;
   itemB: string;
-  status: "active" | "below_threshold";
+  status: PatternStatus;
   lift: number;
   stored: boolean;
 }
+
+function correlationStatus(confidence: number): PatternStatus {
+  if (confidence >= ACTIVE_THRESHOLD) return "active";
+  if (confidence >= MIN_CONFIDENCE_TO_STORE) return "below_threshold";
+  return "too_weak";
+}
+
+function associationStatus(lift: number): PatternStatus {
+  if (lift >= ACTIVE_LIFT_THRESHOLD) return "active";
+  if (lift >= MIN_LIFT_TO_STORE) return "below_threshold";
+  return "too_weak";
+}
+
 /**
  * Writes one correlation result as an upserted (:Pattern) node.
  *
- * Upsert key = (patientId, metricA, metricB) with metric names sorted
+ * Always writes, regardless of score — a pattern that weakens over time must
+ * have its status/lastUpdated refreshed, not go stale. The three-tier status
+ * (active / below_threshold / too_weak) records the full history of every
+ * metric pair ever evaluated, which the Closed-Loop Learning design (Section 8
+ * of the architecture doc) depends on. Nothing is ever deleted here.
+ *
+ * Upsert key = (patientId, metricA, metricB, method) with metric names sorted
  * alphabetically first, so "A vs B" and "B vs A" always resolve to the same
- * node instead of creating duplicates. Re-running this for the same pair
- * always updates the existing node — required for idempotent nightly runs
- * (Section 3.3 of the production architecture doc).
+ * node instead of creating duplicates.
  */
 export async function persistPattern(
   session: Session,
   patientId: string,
   result: CorrelationResult,
 ): Promise<PersistedPatternSummary> {
-  if (result.confidence < MIN_CONFIDENCE_TO_STORE) {
-    return {
-      metricA: result.metricA,
-      metricB: result.metricB,
-      status: "below_threshold",
-      confidence: result.confidence,
-      stored: false,
-    };
-  }
-
-  const status =
-    result.confidence >= ACTIVE_THRESHOLD ? "active" : "below_threshold";
+  const status = correlationStatus(result.confidence);
 
   // Sort so the pair key is order-independent
   const [sortedA, sortedB] = [result.metricA, result.metricB].sort();
@@ -59,10 +67,10 @@ export async function persistPattern(
     MERGE (p)-[:HAS_PATTERN]->(pattern:Pattern {
       patientId: $patientId,
       metricA: $sortedA,
-      metricB: $sortedB
+      metricB: $sortedB,
+      method: "correlation"
     })
     SET
-      pattern.method = "correlation",
       pattern.direction = $direction,
       pattern.lagDays = $lagDays,
       pattern.confidence = $confidence,
@@ -113,26 +121,17 @@ export async function persistAllPatterns(
 /**
  * Writes one association rule as an upserted (:Pattern) node — same table,
  * same Patient relationship as correlation Patterns, distinguished by
- * method: "association". Upsert key = (patientId, itemA, itemB) with items
- * sorted alphabetically, same order-independence approach as correlation.
+ * method: "association". Always writes, same rationale as persistPattern
+ * above — a rule's status must stay current, never frozen from a past run.
+ * Upsert key = (patientId, itemA, itemB, method) with items sorted
+ * alphabetically, same order-independence approach as correlation.
  */
 export async function persistAssociationRule(
   session: Session,
   patientId: string,
   rule: AssociationRule,
 ): Promise<PersistedAssociationSummary> {
-  if (rule.lift < MIN_LIFT_TO_STORE) {
-    return {
-      itemA: rule.itemA,
-      itemB: rule.itemB,
-      status: "below_threshold",
-      lift: rule.lift,
-      stored: false,
-    };
-  }
-
-  const status =
-    rule.lift >= ACTIVE_LIFT_THRESHOLD ? "active" : "below_threshold";
+  const status = associationStatus(rule.lift);
   const [sortedA, sortedB] = [rule.itemA, rule.itemB].sort();
 
   await session.run(
@@ -141,10 +140,10 @@ export async function persistAssociationRule(
     MERGE (p)-[:HAS_PATTERN]->(pattern:Pattern {
       patientId: $patientId,
       metricA: $sortedA,
-      metricB: $sortedB
+      metricB: $sortedB,
+      method: "association"
     })
     SET
-      pattern.method = "association",
       pattern.direction = $direction,
       pattern.support = $support,
       pattern.confidence = $confidence,
