@@ -1,0 +1,1466 @@
+[
+  {
+    "patientId": "synthetic-responder-1",
+    "date": "2026-01-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 9.4
+  },
+  {
+    "patientId": "synthetic-responder-1",
+    "date": "2026-01-05",
+    "type": "Walking",
+    "value": 1914
+  },
+  {
+    "patientId": "synthetic-responder-1",
+    "date": "2026-01-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-responder-1",
+    "date": "2026-02-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 9.1
+  },
+  {
+    "patientId": "synthetic-responder-1",
+    "date": "2026-02-05",
+    "type": "Walking",
+    "value": 2954
+  },
+  {
+    "patientId": "synthetic-responder-1",
+    "date": "2026-02-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-responder-1",
+    "date": "2026-03-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 8.8
+  },
+  {
+    "patientId": "synthetic-responder-1",
+    "date": "2026-03-05",
+    "type": "Walking",
+    "value": 3925
+  },
+  {
+    "patientId": "synthetic-responder-1",
+    "date": "2026-03-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-responder-1",
+    "date": "2026-04-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 8.4
+  },
+  {
+    "patientId": "synthetic-responder-1",
+    "date": "2026-04-05",
+    "type": "Walking",
+    "value": 5171
+  },
+  {
+    "patientId": "synthetic-responder-1",
+    "date": "2026-04-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-responder-1",
+    "date": "2026-05-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 8.1
+  },
+  {
+    "patientId": "synthetic-responder-1",
+    "date": "2026-05-05",
+    "type": "Walking",
+    "value": 6350
+  },
+  {
+    "patientId": "synthetic-responder-1",
+    "date": "2026-05-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-responder-1",
+    "date": "2026-06-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 7.8
+  },
+  {
+    "patientId": "synthetic-responder-1",
+    "date": "2026-06-05",
+    "type": "Walking",
+    "value": 7466
+  },
+  {
+    "patientId": "synthetic-responder-1",
+    "date": "2026-06-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-responder-2",
+    "date": "2026-01-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 9.8
+  },
+  {
+    "patientId": "synthetic-responder-2",
+    "date": "2026-01-05",
+    "type": "Walking",
+    "value": 2023
+  },
+  {
+    "patientId": "synthetic-responder-2",
+    "date": "2026-01-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-responder-2",
+    "date": "2026-02-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 9.5
+  },
+  {
+    "patientId": "synthetic-responder-2",
+    "date": "2026-02-05",
+    "type": "Walking",
+    "value": 3231
+  },
+  {
+    "patientId": "synthetic-responder-2",
+    "date": "2026-02-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-responder-2",
+    "date": "2026-03-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 9.2
+  },
+  {
+    "patientId": "synthetic-responder-2",
+    "date": "2026-03-05",
+    "type": "Walking",
+    "value": 4232
+  },
+  {
+    "patientId": "synthetic-responder-2",
+    "date": "2026-03-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-responder-2",
+    "date": "2026-04-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 8.9
+  },
+  {
+    "patientId": "synthetic-responder-2",
+    "date": "2026-04-05",
+    "type": "Walking",
+    "value": 5491
+  },
+  {
+    "patientId": "synthetic-responder-2",
+    "date": "2026-04-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-responder-2",
+    "date": "2026-05-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 8.5
+  },
+  {
+    "patientId": "synthetic-responder-2",
+    "date": "2026-05-05",
+    "type": "Walking",
+    "value": 6503
+  },
+  {
+    "patientId": "synthetic-responder-2",
+    "date": "2026-05-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-responder-2",
+    "date": "2026-06-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 8.2
+  },
+  {
+    "patientId": "synthetic-responder-2",
+    "date": "2026-06-05",
+    "type": "Walking",
+    "value": 7545
+  },
+  {
+    "patientId": "synthetic-responder-2",
+    "date": "2026-06-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-responder-3",
+    "date": "2026-01-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 9.1
+  },
+  {
+    "patientId": "synthetic-responder-3",
+    "date": "2026-01-05",
+    "type": "Walking",
+    "value": 1963
+  },
+  {
+    "patientId": "synthetic-responder-3",
+    "date": "2026-01-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-responder-3",
+    "date": "2026-02-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 8.7
+  },
+  {
+    "patientId": "synthetic-responder-3",
+    "date": "2026-02-05",
+    "type": "Walking",
+    "value": 3037
+  },
+  {
+    "patientId": "synthetic-responder-3",
+    "date": "2026-02-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-responder-3",
+    "date": "2026-03-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 8.4
+  },
+  {
+    "patientId": "synthetic-responder-3",
+    "date": "2026-03-05",
+    "type": "Walking",
+    "value": 4047
+  },
+  {
+    "patientId": "synthetic-responder-3",
+    "date": "2026-03-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-responder-3",
+    "date": "2026-04-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 8.0
+  },
+  {
+    "patientId": "synthetic-responder-3",
+    "date": "2026-04-05",
+    "type": "Walking",
+    "value": 5119
+  },
+  {
+    "patientId": "synthetic-responder-3",
+    "date": "2026-04-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-responder-3",
+    "date": "2026-05-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 7.7
+  },
+  {
+    "patientId": "synthetic-responder-3",
+    "date": "2026-05-05",
+    "type": "Walking",
+    "value": 6213
+  },
+  {
+    "patientId": "synthetic-responder-3",
+    "date": "2026-05-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-responder-3",
+    "date": "2026-06-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 7.4
+  },
+  {
+    "patientId": "synthetic-responder-3",
+    "date": "2026-06-05",
+    "type": "Walking",
+    "value": 7546
+  },
+  {
+    "patientId": "synthetic-responder-3",
+    "date": "2026-06-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-responder-4",
+    "date": "2026-01-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 10.2
+  },
+  {
+    "patientId": "synthetic-responder-4",
+    "date": "2026-01-05",
+    "type": "Walking",
+    "value": 1844
+  },
+  {
+    "patientId": "synthetic-responder-4",
+    "date": "2026-01-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-responder-4",
+    "date": "2026-02-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 9.8
+  },
+  {
+    "patientId": "synthetic-responder-4",
+    "date": "2026-02-05",
+    "type": "Walking",
+    "value": 3018
+  },
+  {
+    "patientId": "synthetic-responder-4",
+    "date": "2026-02-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-responder-4",
+    "date": "2026-03-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 9.5
+  },
+  {
+    "patientId": "synthetic-responder-4",
+    "date": "2026-03-05",
+    "type": "Walking",
+    "value": 4390
+  },
+  {
+    "patientId": "synthetic-responder-4",
+    "date": "2026-03-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-responder-4",
+    "date": "2026-04-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 9.2
+  },
+  {
+    "patientId": "synthetic-responder-4",
+    "date": "2026-04-05",
+    "type": "Walking",
+    "value": 5572
+  },
+  {
+    "patientId": "synthetic-responder-4",
+    "date": "2026-04-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-responder-4",
+    "date": "2026-05-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 8.9
+  },
+  {
+    "patientId": "synthetic-responder-4",
+    "date": "2026-05-05",
+    "type": "Walking",
+    "value": 6793
+  },
+  {
+    "patientId": "synthetic-responder-4",
+    "date": "2026-05-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-responder-4",
+    "date": "2026-06-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 8.5
+  },
+  {
+    "patientId": "synthetic-responder-4",
+    "date": "2026-06-05",
+    "type": "Walking",
+    "value": 8134
+  },
+  {
+    "patientId": "synthetic-responder-4",
+    "date": "2026-06-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-responder-5",
+    "date": "2026-01-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 8.9
+  },
+  {
+    "patientId": "synthetic-responder-5",
+    "date": "2026-01-05",
+    "type": "Walking",
+    "value": 1871
+  },
+  {
+    "patientId": "synthetic-responder-5",
+    "date": "2026-01-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-responder-5",
+    "date": "2026-02-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 8.6
+  },
+  {
+    "patientId": "synthetic-responder-5",
+    "date": "2026-02-05",
+    "type": "Walking",
+    "value": 2887
+  },
+  {
+    "patientId": "synthetic-responder-5",
+    "date": "2026-02-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-responder-5",
+    "date": "2026-03-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 8.2
+  },
+  {
+    "patientId": "synthetic-responder-5",
+    "date": "2026-03-05",
+    "type": "Walking",
+    "value": 3827
+  },
+  {
+    "patientId": "synthetic-responder-5",
+    "date": "2026-03-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-responder-5",
+    "date": "2026-04-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 7.8
+  },
+  {
+    "patientId": "synthetic-responder-5",
+    "date": "2026-04-05",
+    "type": "Walking",
+    "value": 5170
+  },
+  {
+    "patientId": "synthetic-responder-5",
+    "date": "2026-04-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-responder-5",
+    "date": "2026-05-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 7.5
+  },
+  {
+    "patientId": "synthetic-responder-5",
+    "date": "2026-05-05",
+    "type": "Walking",
+    "value": 6212
+  },
+  {
+    "patientId": "synthetic-responder-5",
+    "date": "2026-05-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-responder-5",
+    "date": "2026-06-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 7.2
+  },
+  {
+    "patientId": "synthetic-responder-5",
+    "date": "2026-06-05",
+    "type": "Walking",
+    "value": 7539
+  },
+  {
+    "patientId": "synthetic-responder-5",
+    "date": "2026-06-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-nonresponder-1",
+    "date": "2026-01-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 8.6
+  },
+  {
+    "patientId": "synthetic-nonresponder-1",
+    "date": "2026-01-05",
+    "type": "Walking",
+    "value": 2363
+  },
+  {
+    "patientId": "synthetic-nonresponder-1",
+    "date": "2026-01-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-nonresponder-1",
+    "date": "2026-02-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 8.7
+  },
+  {
+    "patientId": "synthetic-nonresponder-1",
+    "date": "2026-02-05",
+    "type": "Walking",
+    "value": 3270
+  },
+  {
+    "patientId": "synthetic-nonresponder-1",
+    "date": "2026-03-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 8.8
+  },
+  {
+    "patientId": "synthetic-nonresponder-1",
+    "date": "2026-03-05",
+    "type": "Walking",
+    "value": 4429
+  },
+  {
+    "patientId": "synthetic-nonresponder-1",
+    "date": "2026-03-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-nonresponder-1",
+    "date": "2026-04-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 8.8
+  },
+  {
+    "patientId": "synthetic-nonresponder-1",
+    "date": "2026-04-05",
+    "type": "Walking",
+    "value": 5560
+  },
+  {
+    "patientId": "synthetic-nonresponder-1",
+    "date": "2026-05-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 8.8
+  },
+  {
+    "patientId": "synthetic-nonresponder-1",
+    "date": "2026-05-05",
+    "type": "Walking",
+    "value": 6685
+  },
+  {
+    "patientId": "synthetic-nonresponder-1",
+    "date": "2026-05-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-nonresponder-1",
+    "date": "2026-06-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 8.8
+  },
+  {
+    "patientId": "synthetic-nonresponder-1",
+    "date": "2026-06-05",
+    "type": "Walking",
+    "value": 7858
+  },
+  {
+    "patientId": "synthetic-nonresponder-2",
+    "date": "2026-01-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 9.0
+  },
+  {
+    "patientId": "synthetic-nonresponder-2",
+    "date": "2026-01-05",
+    "type": "Walking",
+    "value": 2570
+  },
+  {
+    "patientId": "synthetic-nonresponder-2",
+    "date": "2026-01-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-nonresponder-2",
+    "date": "2026-02-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 9.1
+  },
+  {
+    "patientId": "synthetic-nonresponder-2",
+    "date": "2026-02-05",
+    "type": "Walking",
+    "value": 3482
+  },
+  {
+    "patientId": "synthetic-nonresponder-2",
+    "date": "2026-03-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 9.2
+  },
+  {
+    "patientId": "synthetic-nonresponder-2",
+    "date": "2026-03-05",
+    "type": "Walking",
+    "value": 4713
+  },
+  {
+    "patientId": "synthetic-nonresponder-2",
+    "date": "2026-03-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-nonresponder-2",
+    "date": "2026-04-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 9.2
+  },
+  {
+    "patientId": "synthetic-nonresponder-2",
+    "date": "2026-04-05",
+    "type": "Walking",
+    "value": 5541
+  },
+  {
+    "patientId": "synthetic-nonresponder-2",
+    "date": "2026-05-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 9.3
+  },
+  {
+    "patientId": "synthetic-nonresponder-2",
+    "date": "2026-05-05",
+    "type": "Walking",
+    "value": 6357
+  },
+  {
+    "patientId": "synthetic-nonresponder-2",
+    "date": "2026-05-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-nonresponder-2",
+    "date": "2026-06-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 9.3
+  },
+  {
+    "patientId": "synthetic-nonresponder-2",
+    "date": "2026-06-05",
+    "type": "Walking",
+    "value": 7362
+  },
+  {
+    "patientId": "synthetic-nonresponder-3",
+    "date": "2026-01-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 9.3
+  },
+  {
+    "patientId": "synthetic-nonresponder-3",
+    "date": "2026-01-05",
+    "type": "Walking",
+    "value": 2580
+  },
+  {
+    "patientId": "synthetic-nonresponder-3",
+    "date": "2026-01-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-nonresponder-3",
+    "date": "2026-02-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 9.4
+  },
+  {
+    "patientId": "synthetic-nonresponder-3",
+    "date": "2026-02-05",
+    "type": "Walking",
+    "value": 3828
+  },
+  {
+    "patientId": "synthetic-nonresponder-3",
+    "date": "2026-03-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 9.5
+  },
+  {
+    "patientId": "synthetic-nonresponder-3",
+    "date": "2026-03-05",
+    "type": "Walking",
+    "value": 4736
+  },
+  {
+    "patientId": "synthetic-nonresponder-3",
+    "date": "2026-03-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-nonresponder-3",
+    "date": "2026-04-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 9.6
+  },
+  {
+    "patientId": "synthetic-nonresponder-3",
+    "date": "2026-04-05",
+    "type": "Walking",
+    "value": 5738
+  },
+  {
+    "patientId": "synthetic-nonresponder-3",
+    "date": "2026-05-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 9.6
+  },
+  {
+    "patientId": "synthetic-nonresponder-3",
+    "date": "2026-05-05",
+    "type": "Walking",
+    "value": 6867
+  },
+  {
+    "patientId": "synthetic-nonresponder-3",
+    "date": "2026-05-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-nonresponder-3",
+    "date": "2026-06-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 9.6
+  },
+  {
+    "patientId": "synthetic-nonresponder-3",
+    "date": "2026-06-05",
+    "type": "Walking",
+    "value": 7802
+  },
+  {
+    "patientId": "synthetic-nonresponder-4",
+    "date": "2026-01-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 8.2
+  },
+  {
+    "patientId": "synthetic-nonresponder-4",
+    "date": "2026-01-05",
+    "type": "Walking",
+    "value": 2269
+  },
+  {
+    "patientId": "synthetic-nonresponder-4",
+    "date": "2026-01-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-nonresponder-4",
+    "date": "2026-02-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 8.3
+  },
+  {
+    "patientId": "synthetic-nonresponder-4",
+    "date": "2026-02-05",
+    "type": "Walking",
+    "value": 3451
+  },
+  {
+    "patientId": "synthetic-nonresponder-4",
+    "date": "2026-03-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 8.3
+  },
+  {
+    "patientId": "synthetic-nonresponder-4",
+    "date": "2026-03-05",
+    "type": "Walking",
+    "value": 4710
+  },
+  {
+    "patientId": "synthetic-nonresponder-4",
+    "date": "2026-03-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-nonresponder-4",
+    "date": "2026-04-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 8.3
+  },
+  {
+    "patientId": "synthetic-nonresponder-4",
+    "date": "2026-04-05",
+    "type": "Walking",
+    "value": 5695
+  },
+  {
+    "patientId": "synthetic-nonresponder-4",
+    "date": "2026-05-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 8.4
+  },
+  {
+    "patientId": "synthetic-nonresponder-4",
+    "date": "2026-05-05",
+    "type": "Walking",
+    "value": 6565
+  },
+  {
+    "patientId": "synthetic-nonresponder-4",
+    "date": "2026-05-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-nonresponder-4",
+    "date": "2026-06-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 8.5
+  },
+  {
+    "patientId": "synthetic-nonresponder-4",
+    "date": "2026-06-05",
+    "type": "Walking",
+    "value": 7411
+  },
+  {
+    "patientId": "synthetic-confounded-1",
+    "date": "2026-01-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 9.0
+  },
+  {
+    "patientId": "synthetic-confounded-1",
+    "date": "2026-01-05",
+    "type": "Walking",
+    "value": 2321
+  },
+  {
+    "patientId": "synthetic-confounded-1",
+    "date": "2026-01-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-confounded-1",
+    "date": "2026-02-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 8.9
+  },
+  {
+    "patientId": "synthetic-confounded-1",
+    "date": "2026-02-05",
+    "type": "Walking",
+    "value": 3269
+  },
+  {
+    "patientId": "synthetic-confounded-1",
+    "date": "2026-02-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-confounded-1",
+    "date": "2026-02-05",
+    "type": "Symptom",
+    "symptom": "Infection"
+  },
+  {
+    "patientId": "synthetic-confounded-1",
+    "date": "2026-03-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 9.2
+  },
+  {
+    "patientId": "synthetic-confounded-1",
+    "date": "2026-03-05",
+    "type": "Walking",
+    "value": 3901
+  },
+  {
+    "patientId": "synthetic-confounded-1",
+    "date": "2026-03-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-confounded-1",
+    "date": "2026-04-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 9.0
+  },
+  {
+    "patientId": "synthetic-confounded-1",
+    "date": "2026-04-05",
+    "type": "Walking",
+    "value": 4806
+  },
+  {
+    "patientId": "synthetic-confounded-1",
+    "date": "2026-04-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-confounded-1",
+    "date": "2026-04-05",
+    "type": "Symptom",
+    "symptom": "Infection"
+  },
+  {
+    "patientId": "synthetic-confounded-1",
+    "date": "2026-05-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 9.4
+  },
+  {
+    "patientId": "synthetic-confounded-1",
+    "date": "2026-05-05",
+    "type": "Walking",
+    "value": 5676
+  },
+  {
+    "patientId": "synthetic-confounded-1",
+    "date": "2026-05-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-confounded-1",
+    "date": "2026-06-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 9.2
+  },
+  {
+    "patientId": "synthetic-confounded-1",
+    "date": "2026-06-05",
+    "type": "Walking",
+    "value": 6559
+  },
+  {
+    "patientId": "synthetic-confounded-1",
+    "date": "2026-06-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-confounded-2",
+    "date": "2026-01-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 9.5
+  },
+  {
+    "patientId": "synthetic-confounded-2",
+    "date": "2026-01-05",
+    "type": "Walking",
+    "value": 2348
+  },
+  {
+    "patientId": "synthetic-confounded-2",
+    "date": "2026-01-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-confounded-2",
+    "date": "2026-02-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 9.3
+  },
+  {
+    "patientId": "synthetic-confounded-2",
+    "date": "2026-02-05",
+    "type": "Walking",
+    "value": 3297
+  },
+  {
+    "patientId": "synthetic-confounded-2",
+    "date": "2026-02-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-confounded-2",
+    "date": "2026-02-05",
+    "type": "Symptom",
+    "symptom": "Infection"
+  },
+  {
+    "patientId": "synthetic-confounded-2",
+    "date": "2026-03-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 9.6
+  },
+  {
+    "patientId": "synthetic-confounded-2",
+    "date": "2026-03-05",
+    "type": "Walking",
+    "value": 4281
+  },
+  {
+    "patientId": "synthetic-confounded-2",
+    "date": "2026-03-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-confounded-2",
+    "date": "2026-04-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 9.5
+  },
+  {
+    "patientId": "synthetic-confounded-2",
+    "date": "2026-04-05",
+    "type": "Walking",
+    "value": 5209
+  },
+  {
+    "patientId": "synthetic-confounded-2",
+    "date": "2026-04-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-confounded-2",
+    "date": "2026-04-05",
+    "type": "Symptom",
+    "symptom": "Infection"
+  },
+  {
+    "patientId": "synthetic-confounded-2",
+    "date": "2026-05-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 9.7
+  },
+  {
+    "patientId": "synthetic-confounded-2",
+    "date": "2026-05-05",
+    "type": "Walking",
+    "value": 5959
+  },
+  {
+    "patientId": "synthetic-confounded-2",
+    "date": "2026-05-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-confounded-2",
+    "date": "2026-06-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 9.6
+  },
+  {
+    "patientId": "synthetic-confounded-2",
+    "date": "2026-06-05",
+    "type": "Walking",
+    "value": 6791
+  },
+  {
+    "patientId": "synthetic-confounded-2",
+    "date": "2026-06-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-confounded-3",
+    "date": "2026-01-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 8.7
+  },
+  {
+    "patientId": "synthetic-confounded-3",
+    "date": "2026-01-05",
+    "type": "Walking",
+    "value": 2448
+  },
+  {
+    "patientId": "synthetic-confounded-3",
+    "date": "2026-01-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-confounded-3",
+    "date": "2026-02-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 8.5
+  },
+  {
+    "patientId": "synthetic-confounded-3",
+    "date": "2026-02-05",
+    "type": "Walking",
+    "value": 3545
+  },
+  {
+    "patientId": "synthetic-confounded-3",
+    "date": "2026-02-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-confounded-3",
+    "date": "2026-02-05",
+    "type": "Symptom",
+    "symptom": "Infection"
+  },
+  {
+    "patientId": "synthetic-confounded-3",
+    "date": "2026-03-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 8.8
+  },
+  {
+    "patientId": "synthetic-confounded-3",
+    "date": "2026-03-05",
+    "type": "Walking",
+    "value": 4236
+  },
+  {
+    "patientId": "synthetic-confounded-3",
+    "date": "2026-03-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-confounded-3",
+    "date": "2026-04-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 8.6
+  },
+  {
+    "patientId": "synthetic-confounded-3",
+    "date": "2026-04-05",
+    "type": "Walking",
+    "value": 4890
+  },
+  {
+    "patientId": "synthetic-confounded-3",
+    "date": "2026-04-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-confounded-3",
+    "date": "2026-04-05",
+    "type": "Symptom",
+    "symptom": "Infection"
+  },
+  {
+    "patientId": "synthetic-confounded-3",
+    "date": "2026-05-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 8.9
+  },
+  {
+    "patientId": "synthetic-confounded-3",
+    "date": "2026-05-05",
+    "type": "Walking",
+    "value": 5642
+  },
+  {
+    "patientId": "synthetic-confounded-3",
+    "date": "2026-05-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-confounded-3",
+    "date": "2026-06-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 8.7
+  },
+  {
+    "patientId": "synthetic-confounded-3",
+    "date": "2026-06-05",
+    "type": "Walking",
+    "value": 6501
+  },
+  {
+    "patientId": "synthetic-confounded-3",
+    "date": "2026-06-05",
+    "type": "Medication",
+    "drug": "Metformin",
+    "dose": "500mg"
+  },
+  {
+    "patientId": "synthetic-sparse-1",
+    "date": "2026-01-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 9.5
+  },
+  {
+    "patientId": "synthetic-sparse-1",
+    "date": "2026-02-05",
+    "type": "Walking",
+    "value": 4172
+  },
+  {
+    "patientId": "synthetic-sparse-1",
+    "date": "2026-03-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 9.292124193976075
+  },
+  {
+    "patientId": "synthetic-sparse-1",
+    "date": "2026-04-05",
+    "type": "Walking",
+    "value": 4453
+  },
+  {
+    "patientId": "synthetic-sparse-2",
+    "date": "2026-01-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 9.0
+  },
+  {
+    "patientId": "synthetic-sparse-2",
+    "date": "2026-02-05",
+    "type": "Walking",
+    "value": 3486
+  },
+  {
+    "patientId": "synthetic-sparse-2",
+    "date": "2026-03-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 8.877626454935822
+  },
+  {
+    "patientId": "synthetic-sparse-2",
+    "date": "2026-04-05",
+    "type": "Walking",
+    "value": 3259
+  },
+  {
+    "patientId": "synthetic-sparse-3",
+    "date": "2026-01-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 8.1
+  },
+  {
+    "patientId": "synthetic-sparse-3",
+    "date": "2026-02-05",
+    "type": "Walking",
+    "value": 2322
+  },
+  {
+    "patientId": "synthetic-sparse-3",
+    "date": "2026-03-05",
+    "type": "HbA1c",
+    "parameter": "HbA1c",
+    "value": 7.824398080159192
+  }
+]

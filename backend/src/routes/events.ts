@@ -456,6 +456,45 @@ eventsRouter.delete(
   },
 );
 
+// GET /events/:patientId/patterns — reads back persisted (:Pattern) nodes,
+// both methods. This is what Phase D will call — it must read what's already
+// been computed and thresholded, not recompute Phase B/C on every request.
+eventsRouter.get(
+  "/:patientId/patterns",
+  async (req: Request, res: Response) => {
+    const { patientId } = req.params;
+    if (typeof patientId !== "string") {
+      return res.status(400).json({ error: "Invalid patientId" });
+    }
+
+    try {
+      const result = await withSession((session) =>
+        session.run(
+          `
+          MATCH (p:Patient {id: $patientId})-[:HAS_PATTERN]->(pattern:Pattern)
+          RETURN pattern
+          ORDER BY pattern.status DESC, pattern.lastUpdated DESC
+          `,
+          { patientId },
+        ),
+      );
+
+      const patterns = result.records.map((r) => r.get("pattern").properties);
+      const active = patterns.filter((p) => p.status === "active");
+
+      return res.json({
+        patientId,
+        count: patterns.length,
+        activeCount: active.length,
+        patterns,
+      });
+    } catch (err) {
+      console.error("Failed to fetch patterns:", err);
+      return res.status(500).json({ error: "Failed to fetch patterns" });
+    }
+  },
+);
+
 // GET /events/:patientId/graph — returns nodes + edges shaped for visualization
 eventsRouter.get("/:patientId/graph", async (req: Request, res: Response) => {
   const { patientId } = req.params;
