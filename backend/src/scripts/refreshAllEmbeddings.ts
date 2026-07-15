@@ -1,3 +1,4 @@
+export {};
 const BACKEND_URL = process.env.BACKEND_URL ?? "http://localhost:4000";
 
 /**
@@ -33,7 +34,7 @@ async function refreshOne(patientId: string) {
     `${BACKEND_URL}/patients/${patientId}/embeddings/refresh`,
     { method: "POST" },
   );
-  const body = await res.json();
+  const body = (await res.json()) as any;
   if (!res.ok) {
     console.error(`  FAILED ${patientId}:`, body);
     return { patientId, ok: false };

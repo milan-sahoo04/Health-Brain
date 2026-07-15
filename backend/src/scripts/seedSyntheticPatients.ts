@@ -28,7 +28,7 @@ async function main() {
     body: JSON.stringify(events),
   });
 
-  const body = await res.json();
+  const body = (await res.json()) as any;
 
   if (res.status !== 207 && !res.ok) {
     console.error("Seed request failed:", body);
