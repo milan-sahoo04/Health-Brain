@@ -7,7 +7,9 @@ const BACKEND_URL = process.env.BACKEND_URL ?? "http://localhost:4000";
  */
 async function main() {
   const patientsRes = await fetch(`${BACKEND_URL}/patients`);
-  const { patients } = await patientsRes.json();
+  const { patients } = (await patientsRes.json()) as {
+    patients: { id: string }[];
+  };
 
   console.log(
     `Backfilling upstream pipeline for ${patients.length} patients...\n`,

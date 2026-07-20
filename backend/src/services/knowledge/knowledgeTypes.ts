@@ -16,6 +16,8 @@ export interface Knowledge {
   firstPromotedAt: string;
   lastEvaluatedAt: string;
   versionCount: number;
+  retractedAt: string | null; // NEW
+  retractionReason: string | null; // NEW
 }
 
 /**
@@ -33,6 +35,7 @@ export interface KnowledgeVersion {
   contradictionReportJson: string;
   knowledgeCandidateId: string; // which specific KnowledgeCandidate run produced this version
   createdAt: string;
+  retractionReason: string | null;
 }
 
 /**
