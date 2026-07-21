@@ -13,6 +13,7 @@ import { retract } from "../services/knowledge/knowledgeRetraction";
 import { reactivateKnowledge } from "../db/queries/knowledgeRetractionPersistence";
 import { reactivateKnowledge as reactivate } from "../db/queries/knowledgeRetractionPersistence";
 import { promotePatientKnowledge } from "../services/knowledge/knowledgePromoter";
+import { VersioningPolicy } from "../services/knowledge/versioningPolicy";
 
 export const knowledgeRouter = Router();
 
@@ -1089,6 +1090,54 @@ knowledgeRouter.post(
       return res
         .status(500)
         .json({ error: "Failed to promote patient knowledge" });
+    }
+  },
+);
+
+// POST /patients/:id/knowledge/test-promote-with-policy — TEST-ONLY,
+// isolated from production. Re-reads REAL accepted KnowledgeCandidates
+// (not fixtures) but promotes them using a CUSTOM, lower threshold, to
+// validate the append_version/updated path without loosening the real
+// DEFAULT_VERSIONING_POLICY used by /knowledge/promote. The production
+// route and its default policy are completely untouched by this route.
+knowledgeRouter.post(
+  "/:id/knowledge/test-promote-with-policy",
+  async (req: Request, res: Response) => {
+    const { id } = req.params;
+    if (typeof id !== "string" || id.trim() === "") {
+      return res.status(400).json({ error: "Patient id is required" });
+    }
+    const threshold = Number(req.query.threshold);
+    if (!Number.isFinite(threshold) || threshold <= 0 || threshold >= 1) {
+      return res
+        .status(400)
+        .json({
+          error:
+            "A valid 'threshold' query param (0-1) is required, e.g. ?threshold=0.03",
+        });
+    }
+
+    const testPolicy: VersioningPolicy = { strategy: "absolute", threshold };
+
+    try {
+      const check = await withSession((session) =>
+        session.run(`MATCH (p:Patient {id: $id}) RETURN p`, { id }),
+      );
+      if (check.records.length === 0) {
+        return res.status(404).json({ error: `Patient ${id} not found` });
+      }
+
+      const summary = await withSession((session) =>
+        promotePatientKnowledge(session, id, testPolicy),
+      );
+      return res.json({
+        message: `TEST-ONLY promotion with threshold=${threshold} (production default is 0.15, unaffected).`,
+        testPolicyUsed: testPolicy,
+        ...summary,
+      });
+    } catch (err) {
+      console.error("Failed test-promote-with-policy:", err);
+      return res.status(500).json({ error: "Failed test promotion" });
     }
   },
 );
