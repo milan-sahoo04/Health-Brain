@@ -96,7 +96,7 @@ export async function generateWiki(
     MERGE (w)-[:HAS_SECTION]->(s:WikiSection {id: sec.id})
     SET s.wikiPageId = $wikiPageId, s.sectionKey = sec.sectionKey, s.title = sec.title,
         s.content = sec.content, s.sectionOrder = sec.sectionOrder, s.checksum = sec.checksum,
-        s.embeddingStatus = "pending", s.updatedAt = $now, s.createdAt = coalesce(s.createdAt, $now)
+        s.embeddingStatus = "stale", s.updatedAt = $now, s.createdAt = coalesce(s.createdAt, $now)
     WITH w, collect(sec.sectionKey) AS changedKeys
     CREATE (v:WikiPageVersion {
       id: $wikiVersionId, wikiPageId: $wikiPageId, versionNumber: $nextPageVersion,

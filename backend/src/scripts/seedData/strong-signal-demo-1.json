@@ -1,0 +1,41 @@
+[
+  { "patientId": "strong-signal-demo-1", "date": "2026-05-17", "type": "HbA1c", "parameter": "HbA1c", "value": 9.25 },
+  { "patientId": "strong-signal-demo-1", "date": "2026-05-17", "type": "Walking", "value": 2180 },
+  { "patientId": "strong-signal-demo-1", "date": "2026-05-17", "type": "Medication", "drug": "Metformin", "dose": "500mg" },
+
+  { "patientId": "strong-signal-demo-1", "date": "2026-05-24", "type": "HbA1c", "parameter": "HbA1c", "value": 9.19 },
+  { "patientId": "strong-signal-demo-1", "date": "2026-05-24", "type": "Walking", "value": 2450 },
+  { "patientId": "strong-signal-demo-1", "date": "2026-05-24", "type": "Medication", "drug": "Metformin", "dose": "500mg" },
+
+  { "patientId": "strong-signal-demo-1", "date": "2026-05-31", "type": "HbA1c", "parameter": "HbA1c", "value": 8.93 },
+  { "patientId": "strong-signal-demo-1", "date": "2026-05-31", "type": "Walking", "value": 2950 },
+  { "patientId": "strong-signal-demo-1", "date": "2026-05-31", "type": "Medication", "drug": "Metformin", "dose": "500mg" },
+
+  { "patientId": "strong-signal-demo-1", "date": "2026-06-07", "type": "HbA1c", "parameter": "HbA1c", "value": 8.91 },
+  { "patientId": "strong-signal-demo-1", "date": "2026-06-07", "type": "Walking", "value": 3100 },
+  { "patientId": "strong-signal-demo-1", "date": "2026-06-07", "type": "Medication", "drug": "Metformin", "dose": "500mg" },
+
+  { "patientId": "strong-signal-demo-1", "date": "2026-06-14", "type": "HbA1c", "parameter": "HbA1c", "value": 8.43 },
+  { "patientId": "strong-signal-demo-1", "date": "2026-06-14", "type": "Walking", "value": 3950 },
+  { "patientId": "strong-signal-demo-1", "date": "2026-06-14", "type": "Medication", "drug": "Metformin", "dose": "500mg" },
+
+  { "patientId": "strong-signal-demo-1", "date": "2026-06-21", "type": "HbA1c", "parameter": "HbA1c", "value": 8.39 },
+  { "patientId": "strong-signal-demo-1", "date": "2026-06-21", "type": "Walking", "value": 4150 },
+  { "patientId": "strong-signal-demo-1", "date": "2026-06-21", "type": "Medication", "drug": "Metformin", "dose": "500mg" },
+
+  { "patientId": "strong-signal-demo-1", "date": "2026-06-28", "type": "HbA1c", "parameter": "HbA1c", "value": 7.98 },
+  { "patientId": "strong-signal-demo-1", "date": "2026-06-28", "type": "Walking", "value": 4900 },
+  { "patientId": "strong-signal-demo-1", "date": "2026-06-28", "type": "Medication", "drug": "Metformin", "dose": "500mg" },
+
+  { "patientId": "strong-signal-demo-1", "date": "2026-07-05", "type": "HbA1c", "parameter": "HbA1c", "value": 8.07 },
+  { "patientId": "strong-signal-demo-1", "date": "2026-07-05", "type": "Walking", "value": 4850 },
+  { "patientId": "strong-signal-demo-1", "date": "2026-07-05", "type": "Medication", "drug": "Metformin", "dose": "500mg" },
+
+  { "patientId": "strong-signal-demo-1", "date": "2026-07-12", "type": "HbA1c", "parameter": "HbA1c", "value": 7.61 },
+  { "patientId": "strong-signal-demo-1", "date": "2026-07-12", "type": "Walking", "value": 5700 },
+  { "patientId": "strong-signal-demo-1", "date": "2026-07-12", "type": "Medication", "drug": "Metformin", "dose": "500mg" },
+
+  { "patientId": "strong-signal-demo-1", "date": "2026-07-19", "type": "HbA1c", "parameter": "HbA1c", "value": 7.55 },
+  { "patientId": "strong-signal-demo-1", "date": "2026-07-19", "type": "Walking", "value": 5950 },
+  { "patientId": "strong-signal-demo-1", "date": "2026-07-19", "type": "Medication", "drug": "Metformin", "dose": "500mg" }
+]

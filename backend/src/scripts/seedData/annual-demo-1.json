@@ -1,0 +1,50 @@
+[
+  { "patientId": "annual-demo-1", "date": "2025-08-05", "type": "HbA1c", "parameter": "HbA1c", "value": 9.6 },
+  { "patientId": "annual-demo-1", "date": "2025-08-05", "type": "Walking", "value": 1820 },
+  { "patientId": "annual-demo-1", "date": "2025-08-05", "type": "Medication", "drug": "Metformin", "dose": "500mg" },
+
+  { "patientId": "annual-demo-1", "date": "2025-09-05", "type": "HbA1c", "parameter": "HbA1c", "value": 9.3 },
+  { "patientId": "annual-demo-1", "date": "2025-09-05", "type": "Walking", "value": 2480 },
+  { "patientId": "annual-demo-1", "date": "2025-09-05", "type": "Medication", "drug": "Metformin", "dose": "500mg" },
+
+  { "patientId": "annual-demo-1", "date": "2025-10-05", "type": "HbA1c", "parameter": "HbA1c", "value": 9.5 },
+  { "patientId": "annual-demo-1", "date": "2025-10-05", "type": "Walking", "value": 2210 },
+  { "patientId": "annual-demo-1", "date": "2025-10-05", "type": "Medication", "drug": "Metformin", "dose": "500mg" },
+  { "patientId": "annual-demo-1", "date": "2025-10-05", "type": "Symptom", "symptom": "Infection" },
+
+  { "patientId": "annual-demo-1", "date": "2025-11-05", "type": "HbA1c", "parameter": "HbA1c", "value": 8.9 },
+  { "patientId": "annual-demo-1", "date": "2025-11-05", "type": "Walking", "value": 3420 },
+  { "patientId": "annual-demo-1", "date": "2025-11-05", "type": "Medication", "drug": "Metformin", "dose": "500mg" },
+
+  { "patientId": "annual-demo-1", "date": "2025-12-05", "type": "HbA1c", "parameter": "HbA1c", "value": 8.7 },
+  { "patientId": "annual-demo-1", "date": "2025-12-05", "type": "Walking", "value": 3110 },
+  { "patientId": "annual-demo-1", "date": "2025-12-05", "type": "Medication", "drug": "Metformin", "dose": "500mg" },
+
+  { "patientId": "annual-demo-1", "date": "2026-01-05", "type": "HbA1c", "parameter": "HbA1c", "value": 8.4 },
+  { "patientId": "annual-demo-1", "date": "2026-01-05", "type": "Walking", "value": 4230 },
+  { "patientId": "annual-demo-1", "date": "2026-01-05", "type": "Medication", "drug": "Metformin", "dose": "500mg" },
+
+  { "patientId": "annual-demo-1", "date": "2026-02-05", "type": "HbA1c", "parameter": "HbA1c", "value": 8.6 },
+  { "patientId": "annual-demo-1", "date": "2026-02-05", "type": "Walking", "value": 3890 },
+  { "patientId": "annual-demo-1", "date": "2026-02-05", "type": "Medication", "drug": "Metformin", "dose": "500mg" },
+
+  { "patientId": "annual-demo-1", "date": "2026-03-05", "type": "HbA1c", "parameter": "HbA1c", "value": 8.0 },
+  { "patientId": "annual-demo-1", "date": "2026-03-05", "type": "Walking", "value": 5140 },
+  { "patientId": "annual-demo-1", "date": "2026-03-05", "type": "Medication", "drug": "Metformin", "dose": "500mg" },
+
+  { "patientId": "annual-demo-1", "date": "2026-04-05", "type": "HbA1c", "parameter": "HbA1c", "value": 7.8 },
+  { "patientId": "annual-demo-1", "date": "2026-04-05", "type": "Walking", "value": 5610 },
+  { "patientId": "annual-demo-1", "date": "2026-04-05", "type": "Medication", "drug": "Metformin", "dose": "500mg" },
+
+  { "patientId": "annual-demo-1", "date": "2026-05-05", "type": "HbA1c", "parameter": "HbA1c", "value": 7.9 },
+  { "patientId": "annual-demo-1", "date": "2026-05-05", "type": "Walking", "value": 5340 },
+  { "patientId": "annual-demo-1", "date": "2026-05-05", "type": "Medication", "drug": "Metformin", "dose": "500mg" },
+
+  { "patientId": "annual-demo-1", "date": "2026-06-05", "type": "HbA1c", "parameter": "HbA1c", "value": 7.5 },
+  { "patientId": "annual-demo-1", "date": "2026-06-05", "type": "Walking", "value": 6190 },
+  { "patientId": "annual-demo-1", "date": "2026-06-05", "type": "Medication", "drug": "Metformin", "dose": "500mg" },
+
+  { "patientId": "annual-demo-1", "date": "2026-07-05", "type": "HbA1c", "parameter": "HbA1c", "value": 7.3 },
+  { "patientId": "annual-demo-1", "date": "2026-07-05", "type": "Walking", "value": 6780 },
+  { "patientId": "annual-demo-1", "date": "2026-07-05", "type": "Medication", "drug": "Metformin", "dose": "500mg" }
+]
