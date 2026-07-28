@@ -33,13 +33,25 @@ export async function persistCorrelationResults(
       excludedConfounded: result.excludedConfounded,
       status,
       supportedDates: [
-        ...toPatternDateRefs(result.metricA, result.observations, false).map(
-          (r) => ({ ...r }),
+        ...toPatternDateRefs(
+          result.metricA,
+          result.observations.map((o) => ({
+            date: o.dateA,
+            confounded: o.confounded,
+            confoundedBy: o.confoundedBy,
+          })),
+          false,
         ),
       ],
       confoundedDates: [
-        ...toPatternDateRefs(result.metricA, result.observations, true).map(
-          (r) => ({ ...r }),
+        ...toPatternDateRefs(
+          result.metricA,
+          result.observations.map((o) => ({
+            date: o.dateA,
+            confounded: o.confounded,
+            confoundedBy: o.confoundedBy,
+          })),
+          true,
         ),
       ],
     });

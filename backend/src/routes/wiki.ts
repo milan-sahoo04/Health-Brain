@@ -11,6 +11,7 @@ import {
 } from "../services/wiki/wikiRetriever";
 import { buildAllSections } from "../services/wiki/sectionBuilders";
 import { generateWiki } from "../services/wiki/wikiGenerator";
+import { syncEmbeddings } from "../services/wiki/wikiEmbeddingOrchestrator";
 
 export const wikiRouter = Router();
 
@@ -140,10 +141,17 @@ wikiRouter.post("/:id/wiki/regenerate", async (req: Request, res: Response) => {
     if (check.records.length === 0)
       return res.status(404).json({ error: `Patient ${id} not found` });
 
-    const result = await withSession((session) => generateWiki(session, id));
+    const wikiResult = await withSession((session) =>
+      generateWiki(session, id),
+    );
+    const embeddingResult = await withSession((session) =>
+      syncEmbeddings(session, id, wikiResult),
+    );
+
     return res.json({
-      message: `Wiki ${result.action} for patient ${id}`,
-      ...result,
+      message: `Wiki ${wikiResult.action} for patient ${id}`,
+      wiki: wikiResult,
+      embeddings: embeddingResult,
     });
   } catch (err) {
     console.error("Failed to generate wiki:", err);
@@ -166,11 +174,9 @@ wikiRouter.get("/:id/wiki", async (req: Request, res: Response) => {
       ),
     );
     if (result.records.length === 0)
-      return res
-        .status(404)
-        .json({
-          error: `No wiki found for patient ${id}. Call /regenerate first.`,
-        });
+      return res.status(404).json({
+        error: `No wiki found for patient ${id}. Call /regenerate first.`,
+      });
 
     const w = result.records[0].get("w").properties;
     const sections = result.records[0]
