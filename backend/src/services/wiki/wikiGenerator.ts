@@ -97,7 +97,16 @@ export async function generateWiki(
     SET s.wikiPageId = $wikiPageId, s.sectionKey = sec.sectionKey, s.title = sec.title,
         s.content = sec.content, s.sectionOrder = sec.sectionOrder, s.checksum = sec.checksum,
         s.embeddingStatus = "stale", s.updatedAt = $now, s.createdAt = coalesce(s.createdAt, $now)
-    WITH w, collect(sec.sectionKey) AS changedKeys
+    WITH s, sec
+    OPTIONAL MATCH (s)-[oldSummarizes:SUMMARIZES]->()
+    DELETE oldSummarizes
+    WITH s, sec
+    UNWIND sec.contributingKnowledgeIds AS knowledgeId
+    MATCH (k:Knowledge {id: knowledgeId})
+    MERGE (s)-[:SUMMARIZES]->(k)
+    WITH DISTINCT s
+    MATCH (w2:WikiPage {id: $wikiPageId})-[:HAS_SECTION]->(s)
+    WITH w2 AS w, collect(DISTINCT s.sectionKey) AS changedKeys
     CREATE (v:WikiPageVersion {
       id: $wikiVersionId, wikiPageId: $wikiPageId, versionNumber: $nextPageVersion,
       checksum: $pageChecksum, changedSections: changedKeys, createdAt: $now
@@ -117,7 +126,6 @@ export async function generateWiki(
       })),
     },
   );
-
   return {
     patientId,
     wikiPageId,

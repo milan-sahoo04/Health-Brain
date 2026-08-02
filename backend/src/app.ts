@@ -7,6 +7,7 @@ import { gnnPatternsRouter } from "./routes/gnnPatterns";
 import { ereRouter } from "./routes/ere";
 import { knowledgeRouter } from "./routes/knowledge";
 import { wikiRouter } from "./routes/wiki";
+import { graphragRouter } from "./routes/graphrag";
 
 export function createApp(): Express {
   const app = express();
@@ -25,5 +26,6 @@ export function createApp(): Express {
   app.use("/patients", ereRouter);
   app.use("/patients", knowledgeRouter);
   app.use("/patients", wikiRouter);
+  app.use("/patients", graphragRouter);
   return app;
 }

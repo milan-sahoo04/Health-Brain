@@ -7,6 +7,7 @@ export interface BuiltSection {
   sectionKey: WikiSectionKey;
   title: string;
   content: string;
+  contributingKnowledgeIds: string[]; // NEW — M9.1 provenance contract
 }
 
 const CONFIDENCE_HIGH = 0.6;
@@ -33,7 +34,12 @@ function buildOverview(data: WikiRetrievalResult): BuiltSection {
       ? "No confirmed health patterns yet. As more data is logged and evaluated, this profile will update automatically."
       : `This profile currently tracks ${count} confirmed health pattern${count === 1 ? "" : "s"}, ` +
         `derived from evidence-based analysis of logged health events.`;
-  return { sectionKey: "overview", title: "Overview", content };
+  return {
+    sectionKey: "overview",
+    title: "Overview",
+    content,
+    contributingKnowledgeIds: data.knowledgeItems.map((k) => k.knowledgeId),
+  };
 }
 
 // --- Current Conditions ---
@@ -43,6 +49,7 @@ function buildCurrentConditions(data: WikiRetrievalResult): BuiltSection {
       sectionKey: "currentConditions",
       title: "Current Conditions",
       content: "No active conditions tracked yet.",
+      contributingKnowledgeIds: [],
     };
   }
   const metrics = new Set<string>();
@@ -54,6 +61,7 @@ function buildCurrentConditions(data: WikiRetrievalResult): BuiltSection {
     sectionKey: "currentConditions",
     title: "Current Conditions",
     content,
+    contributingKnowledgeIds: data.knowledgeItems.map((k) => k.knowledgeId),
   };
 }
 
@@ -65,12 +73,9 @@ function buildHealthTimeline(data: WikiRetrievalResult): BuiltSection {
       sectionKey: "healthTimeline",
       title: "Health Timeline",
       content: "No timeline data available yet.",
+      contributingKnowledgeIds: [],
     };
   }
-  // Evidence descriptions carry the real event dates as free text (M5's
-  // temporal_alignment format) — sorted by createdAt as a stable proxy
-  // ordering since evidence doesn't carry a separate structured event
-  // date field at this layer.
   const lines = [...allEvidence]
     .sort((a, b) => a.createdAt.localeCompare(b.createdAt))
     .map((e) => `- ${cleanDescriptionText(e.description)}`);
@@ -78,6 +83,11 @@ function buildHealthTimeline(data: WikiRetrievalResult): BuiltSection {
     sectionKey: "healthTimeline",
     title: "Health Timeline",
     content: lines.join("\n"),
+    // every knowledge item with at least one evidence entry contributed
+    // to this timeline — matches allEvidence's flatMap source exactly.
+    contributingKnowledgeIds: data.knowledgeItems
+      .filter((k) => k.evidence.length > 0)
+      .map((k) => k.knowledgeId),
   };
 }
 
@@ -91,18 +101,21 @@ function buildMajorInsights(data: WikiRetrievalResult): BuiltSection {
       sectionKey: "majorInsights",
       title: "Major Insights",
       content: "No high-confidence insights identified yet.",
+      contributingKnowledgeIds: [],
     };
   }
-  const lines = insights
-    .sort((a, b) => b.currentConfidence - a.currentConfidence)
-    .map(
-      (k) =>
-        `- ${claimText(k)} (confidence: ${(k.currentConfidence * 100).toFixed(0)}%).`,
-    );
+  const sortedInsights = insights.sort(
+    (a, b) => b.currentConfidence - a.currentConfidence,
+  );
+  const lines = sortedInsights.map(
+    (k) =>
+      `- ${claimText(k)} (confidence: ${(k.currentConfidence * 100).toFixed(0)}%).`,
+  );
   return {
     sectionKey: "majorInsights",
     title: "Major Insights",
     content: lines.join("\n"),
+    contributingKnowledgeIds: sortedInsights.map((k) => k.knowledgeId),
   };
 }
 
@@ -115,7 +128,12 @@ function buildPrimaryDrivers(data: WikiRetrievalResult): BuiltSection {
   const content = primary
     ? `Primary driver: ${formatMetricName(primary.involvedMetricNames[0])} (confidence ${(primary.currentConfidence * 100).toFixed(0)}%).`
     : "No primary driver identified yet.";
-  return { sectionKey: "primaryDrivers", title: "Primary Drivers", content };
+  return {
+    sectionKey: "primaryDrivers",
+    title: "Primary Drivers",
+    content,
+    contributingKnowledgeIds: primary ? [primary.knowledgeId] : [],
+  };
 }
 
 function buildSecondaryDrivers(data: WikiRetrievalResult): BuiltSection {
@@ -136,6 +154,7 @@ function buildSecondaryDrivers(data: WikiRetrievalResult): BuiltSection {
     sectionKey: "secondaryDrivers",
     title: "Secondary Drivers",
     content,
+    contributingKnowledgeIds: secondary.map((k) => k.knowledgeId),
   };
 }
 
@@ -148,7 +167,19 @@ function buildRiskAssessment(data: WikiRetrievalResult): BuiltSection {
     declining.length > 0
       ? `Moderate: ${declining.length} tracked pattern${declining.length === 1 ? " is" : "s are"} showing declining confidence and may need review.`
       : "Low: no patterns currently show a declining trend.";
-  return { sectionKey: "riskAssessment", title: "Risk Assessment", content };
+  return {
+    sectionKey: "riskAssessment",
+    title: "Risk Assessment",
+    content,
+    // when nothing is declining, the assessment is still a real statement
+    // ABOUT the full knowledge set (there's a claim being made — "nothing
+    // is declining" — that's only true relative to all tracked items), so
+    // contributingKnowledgeIds reflects the set actually inspected either way.
+    contributingKnowledgeIds: (declining.length > 0
+      ? declining
+      : data.knowledgeItems
+    ).map((k) => k.knowledgeId),
+  };
 }
 
 // --- Confidence Analysis ---
@@ -158,6 +189,7 @@ function buildConfidenceAnalysis(data: WikiRetrievalResult): BuiltSection {
       sectionKey: "confidenceAnalysis",
       title: "Confidence Analysis",
       content: "No confidence data available yet.",
+      contributingKnowledgeIds: [],
     };
   }
   const lines = data.knowledgeItems.map(
@@ -169,6 +201,7 @@ function buildConfidenceAnalysis(data: WikiRetrievalResult): BuiltSection {
     sectionKey: "confidenceAnalysis",
     title: "Confidence Analysis",
     content: lines.join("\n"),
+    contributingKnowledgeIds: data.knowledgeItems.map((k) => k.knowledgeId),
   };
 }
 
@@ -180,6 +213,7 @@ function buildSupportingEvidence(data: WikiRetrievalResult): BuiltSection {
       sectionKey: "supportingEvidence",
       title: "Supporting Evidence",
       content: "No supporting evidence recorded yet.",
+      contributingKnowledgeIds: [],
     };
   }
   const supporting = allEvidence.filter(
@@ -188,6 +222,15 @@ function buildSupportingEvidence(data: WikiRetrievalResult): BuiltSection {
   const contradicting = allEvidence.filter(
     (e) => e.polarity === "contradicting",
   ).length;
+  // Respect the existing .slice(0, 10) cap — only knowledge items whose
+  // evidence actually appears in the RENDERED list count as contributing,
+  // not every item that merely has evidence somewhere in the full set.
+  const renderedEvidenceIds = new Set(
+    allEvidence.slice(0, 10).map((e) => e.id),
+  );
+  const contributingIds = data.knowledgeItems
+    .filter((k) => k.evidence.some((e) => renderedEvidenceIds.has(e.id)))
+    .map((k) => k.knowledgeId);
   const lines = [
     `${supporting} supporting observation${supporting === 1 ? "" : "s"}, ${contradicting} contradicting.`,
     ...allEvidence
@@ -198,6 +241,7 @@ function buildSupportingEvidence(data: WikiRetrievalResult): BuiltSection {
     sectionKey: "supportingEvidence",
     title: "Supporting Evidence",
     content: lines.join("\n"),
+    contributingKnowledgeIds: contributingIds,
   };
 }
 
