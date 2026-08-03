@@ -4,7 +4,7 @@ import { expandFromSections } from "../services/graphrag/graph/graphTraverser";
 import { retrieveCandidates } from "../services/graphrag/retrievers/vectorRetriever";
 import { rankKnowledge } from "../services/graphrag/ranking/hybridRanker";
 import { buildRetrievalContext } from "../services/graphrag/builders/contextBuilder";
-
+import { buildPrompt } from "../services/graphrag/builders/promptBuilder";
 export const graphragRouter = Router();
 
 // GET /patients/:id/graphrag/traverse-preview?sectionIds=id1,id2,...
@@ -193,6 +193,64 @@ graphragRouter.get(
       console.error("Failed context-preview:", err);
       return res.status(500).json({
         error: err instanceof Error ? err.message : "Failed context build",
+      });
+    }
+  },
+);
+
+// GET /patients/:id/graphrag/prompt-preview?query=...&topK=5&budget=8000&maxTokens=4000
+// DEBUG endpoint for M9.6. Full pipeline through PromptPayload.
+graphragRouter.get(
+  "/:id/graphrag/prompt-preview",
+  async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const query = req.query.query;
+    const topK = req.query.topK ? Number(req.query.topK) : undefined;
+    const budget = req.query.budget ? Number(req.query.budget) : undefined;
+    const maxTokens = req.query.maxTokens
+      ? Number(req.query.maxTokens)
+      : undefined;
+
+    if (typeof id !== "string" || id.trim() === "") {
+      return res.status(400).json({ error: "Patient id is required" });
+    }
+    if (typeof query !== "string" || query.trim() === "") {
+      return res.status(400).json({ error: "Query param 'query' is required" });
+    }
+
+    try {
+      const check = await withSession((session) =>
+        session.run(`MATCH (p:Patient {id: $id}) RETURN p`, { id }),
+      );
+      if (check.records.length === 0) {
+        return res.status(404).json({ error: `Patient ${id} not found` });
+      }
+
+      const startTime = Date.now();
+      const hits = await retrieveCandidates(query, id, topK);
+      const sectionIds = hits.map((h) => h.sectionId);
+      const retrieved = await withSession((session) =>
+        expandFromSections(session, id, sectionIds),
+      );
+      const ranked = rankKnowledge(retrieved, hits);
+      const retrievalTimeMs = Date.now() - startTime;
+
+      const context = buildRetrievalContext(
+        query,
+        id,
+        ranked,
+        hits,
+        retrieved.length,
+        retrievalTimeMs,
+        budget,
+      );
+      const prompt = buildPrompt(context, undefined, maxTokens);
+
+      return res.json(prompt);
+    } catch (err) {
+      console.error("Failed prompt-preview:", err);
+      return res.status(500).json({
+        error: err instanceof Error ? err.message : "Failed prompt build",
       });
     }
   },
