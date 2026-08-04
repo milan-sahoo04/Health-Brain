@@ -5,6 +5,8 @@ import { retrieveCandidates } from "../services/graphrag/retrievers/vectorRetrie
 import { rankKnowledge } from "../services/graphrag/ranking/hybridRanker";
 import { buildRetrievalContext } from "../services/graphrag/builders/contextBuilder";
 import { buildPrompt } from "../services/graphrag/builders/promptBuilder";
+import { runGraphRAGRetrieval } from "../services/graphrag/orchestrator";
+
 export const graphragRouter = Router();
 
 // GET /patients/:id/graphrag/traverse-preview?sectionIds=id1,id2,...
@@ -251,6 +253,54 @@ graphragRouter.get(
       console.error("Failed prompt-preview:", err);
       return res.status(500).json({
         error: err instanceof Error ? err.message : "Failed prompt build",
+      });
+    }
+  },
+);
+
+// POST /patients/:id/graphrag/retrieve — PRODUCTION entrypoint.
+// Wires the complete M9.1-M9.7 pipeline. Returns RetrievalContext,
+// PromptPayload, and retrieval metadata ONLY — never a generated
+// medical answer. The stub adapter's ReasoningResult explicitly
+// carries no "answer" field, enforcing this at the type level as well
+// as by convention.
+graphragRouter.post(
+  "/:id/graphrag/retrieve",
+  async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { question, topK, contextCharacterBudget, maxPromptTokens } =
+      req.body;
+
+    if (typeof id !== "string" || id.trim() === "") {
+      return res.status(400).json({ error: "Patient id is required" });
+    }
+    if (typeof question !== "string" || question.trim() === "") {
+      return res
+        .status(400)
+        .json({ error: "'question' is required in the request body" });
+    }
+
+    try {
+      const check = await withSession((session) =>
+        session.run(`MATCH (p:Patient {id: $id}) RETURN p`, { id }),
+      );
+      if (check.records.length === 0) {
+        return res.status(404).json({ error: `Patient ${id} not found` });
+      }
+
+      const result = await withSession((session) =>
+        runGraphRAGRetrieval(session, id, question, {
+          topK,
+          contextCharacterBudget,
+          maxPromptTokens,
+        }),
+      );
+
+      return res.json(result);
+    } catch (err) {
+      console.error("Failed graphrag/retrieve:", err);
+      return res.status(503).json({
+        error: err instanceof Error ? err.message : "Failed retrieval pipeline",
       });
     }
   },
